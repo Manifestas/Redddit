@@ -1,11 +1,9 @@
 package dev.manifest.redddit
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu
-import android.view.MenuItem
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,26 +12,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    /**
+     * Finish activity when reaching the last fragment.
+     */
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val fm = supportFragmentManager
+        if (fm.backStackEntryCount > 1) fm.popBackStack() else finish()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+    fun changeFragment(fragment: Fragment, cleanBackStack: Boolean) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        if (cleanBackStack) clearBackStack()
+        fragmentTransaction.setCustomAnimations(
+            R.anim.abc_fade_in,
+            R.anim.abc_fade_out,
+            R.anim.abc_popup_enter,
+            R.anim.abc_popup_exit
+        )
+        fragmentTransaction.replace(R.id.activity_base_content, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+    }
+
+    fun clearBackStack() {
+        val fm = supportFragmentManager
+        if (fm.backStackEntryCount > 0) {
+            val firstEntry = fm.getBackStackEntryAt(0)
+            fm.popBackStack(firstEntry.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         }
     }
 }
