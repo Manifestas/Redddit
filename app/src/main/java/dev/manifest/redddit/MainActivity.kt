@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import dev.manifest.redddit.news.NewsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        if (savedInstanceState == null) {
+            changeFragment(NewsFragment())
+        }
     }
 
     /**
@@ -23,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         if (fm.backStackEntryCount > 1) fm.popBackStack() else finish()
     }
 
-    fun changeFragment(fragment: Fragment, cleanBackStack: Boolean) {
+    fun changeFragment(fragment: Fragment, cleanBackStack: Boolean = false) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         if (cleanBackStack) clearBackStack()
         fragmentTransaction.setCustomAnimations(
