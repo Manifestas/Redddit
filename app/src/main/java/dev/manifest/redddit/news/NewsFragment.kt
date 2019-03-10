@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.manifest.redddit.R
+import dev.manifest.redddit.commons.adapter.NewsAdapter
 import dev.manifest.redddit.commons.inflate
 import kotlinx.android.synthetic.main.fragment_news.*
 
 class NewsFragment : Fragment() {
-
-    private val newsList by lazy { news_list }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +24,15 @@ class NewsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        newsList.setHasFixedSize(true)
-        newsList.layoutManager = LinearLayoutManager(context)
+        news_list.setHasFixedSize(true)
+        news_list.layoutManager = LinearLayoutManager(context)
+
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+        if (news_list.adapter == null) {
+            news_list.adapter = NewsAdapter()
+        }
     }
 }
