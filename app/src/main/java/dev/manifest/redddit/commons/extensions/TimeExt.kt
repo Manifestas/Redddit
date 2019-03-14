@@ -4,6 +4,7 @@ package dev.manifest.redddit.commons.extensions
 
 import java.util.*
 
+// format like “3 days and 1 minute ago”
 fun Long.getFriendlyTime(): String {
     val dateTime = Date(this * 1000)
     val sb = StringBuffer()
