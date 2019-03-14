@@ -1,5 +1,5 @@
 @file:JvmName("ExtensionsUtils")
-package dev.manifest.redddit.commons
+package dev.manifest.redddit.commons.extensions
 
 import android.view.LayoutInflater
 import android.view.View

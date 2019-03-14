@@ -3,7 +3,7 @@ package dev.manifest.redddit.commons.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import dev.manifest.redddit.R
-import dev.manifest.redddit.commons.inflate
+import dev.manifest.redddit.commons.extensions.inflate
 
 class LoadingDelegateAdapter : ViewTypeDelegateAdapter {
 

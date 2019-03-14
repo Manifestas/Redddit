@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import dev.manifest.redddit.R
 import dev.manifest.redddit.commons.adapter.NewsAdapter
-import dev.manifest.redddit.commons.inflate
+import dev.manifest.redddit.commons.extensions.inflate
 import kotlinx.android.synthetic.main.fragment_news.*
 
 class NewsFragment : Fragment() {
