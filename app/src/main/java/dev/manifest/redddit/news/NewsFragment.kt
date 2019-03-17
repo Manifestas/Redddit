@@ -15,6 +15,8 @@ import kotlinx.android.synthetic.main.fragment_news.*
 
 class NewsFragment : Fragment() {
 
+    private val newsManager by lazy { NewsManager() }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,19 +33,12 @@ class NewsFragment : Fragment() {
         initAdapter()
 
         if (savedInstanceState == null) {
-            val news = mutableListOf<RedditNewsItem>()
-            for (i in 1..10) {
-                news.add(RedditNewsItem(
-                    "author$i",
-                    "Title $i",
-                    i,
-                    1457207701L - i * 200,
-                    "https://picsum.photos/200/200?image=$i",
-                    "url"
-                ))
-            }
-            (news_list.adapter as NewsAdapter).addNews(news)
+            requestNews()
         }
+    }
+
+    private fun requestNews() {
+        // (news_list.adapter as NewsAdapter).addNews(news)
     }
 
     private fun initAdapter() {
