@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dev.manifest.redddit.R
-import dev.manifest.redddit.commons.RedditNewsItem
 import dev.manifest.redddit.commons.adapter.NewsAdapter
 import dev.manifest.redddit.commons.extensions.inflate
 import kotlinx.android.synthetic.main.fragment_news.*
+import rx.schedulers.Schedulers
 
 class NewsFragment : Fragment() {
 
@@ -38,7 +39,12 @@ class NewsFragment : Fragment() {
     }
 
     private fun requestNews() {
-        // (news_list.adapter as NewsAdapter).addNews(news)
+        val subscription = newsManager.getNews()
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                { retrievedNews -> (news_list.adapter as NewsAdapter).addNews(retrievedNews) },
+                { e -> Snackbar.make(news_list, e.message ?: "", Snackbar.LENGTH_LONG).show() }
+            )
     }
 
     private fun initAdapter() {
