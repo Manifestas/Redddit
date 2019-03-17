@@ -14,6 +14,7 @@ import dev.manifest.redddit.commons.RxBaseFragment
 import dev.manifest.redddit.commons.adapter.NewsAdapter
 import dev.manifest.redddit.commons.extensions.inflate
 import kotlinx.android.synthetic.main.fragment_news.*
+import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
 class NewsFragment : RxBaseFragment() {
@@ -52,6 +53,7 @@ class NewsFragment : RxBaseFragment() {
          */
         val subscription = newsManager.getNews(redditNews?.after ?: "")
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { retrievedNews ->
                     redditNews = retrievedNews
