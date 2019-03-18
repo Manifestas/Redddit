@@ -1,11 +1,12 @@
 package dev.manifest.redddit.news
 
-import dev.manifest.redddit.api.RestAPI
+import dev.manifest.redddit.api.NewsAPI
+import dev.manifest.redddit.api.NewsRestAPI
 import dev.manifest.redddit.commons.RedditNews
 import dev.manifest.redddit.commons.RedditNewsItem
 import rx.Observable
 
-class NewsManager(private val api: RestAPI = RestAPI()) {
+class NewsManager(private val api: NewsAPI = NewsRestAPI()) {
 
     /**
      * Returns Reddit News paginated by the given limit.
