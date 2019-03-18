@@ -34,6 +34,7 @@ class NewsManager(private val api: NewsAPI = NewsRestAPI()) {
                 )
 
                 subscriber.onNext(redditNews)
+                subscriber.onCompleted()
 
             } else {
                 subscriber.onError(Throwable(response.message()))
