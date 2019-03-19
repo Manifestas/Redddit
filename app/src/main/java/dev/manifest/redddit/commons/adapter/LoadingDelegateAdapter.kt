@@ -10,11 +10,9 @@ class LoadingDelegateAdapter : ViewTypeDelegateAdapter {
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder = LoadingViewHolder(parent)
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, item: ViewType) {
-        TODO("not implemented")
     }
 
-
-    class LoadingViewHolder(parent: ViewGroup): RecyclerView.ViewHolder(
+    class LoadingViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         parent.inflate(R.layout.news_item_loading)
     )
 }
