@@ -5,8 +5,11 @@ import dev.manifest.redddit.api.NewsRestAPI
 import dev.manifest.redddit.commons.RedditNews
 import dev.manifest.redddit.commons.RedditNewsItem
 import rx.Observable
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class NewsManager(private val api: NewsAPI = NewsRestAPI()) {
+@Singleton
+class NewsManager @Inject constructor (private val api: NewsAPI) {
 
     /**
      * Returns Reddit News paginated by the given limit.
